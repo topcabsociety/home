@@ -3,267 +3,246 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Topless Cabriolet Society</title>
 
 <style>
-
-/* =========================
-   BACKGROUND
-========================= */
-
+/* ========================= BASE ========================= */
 body {
-    margin: 0;
-    font-family: Race Sport;
-    color: #111827;
-    overflow-x: hidden;
-    position: relative;
+  margin: 0;
+  font-family: Race Sport;
+  color: #111827;
+  overflow-x: hidden;
+  position: relative;
 }
 
-/* background image */
+/* ========================= BACKGROUND IMAGE ========================= */
 body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-
-    background: url("bck2.png") no-repeat center center;
-    background-size: cover;
-
-    z-index: -2;
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("bck2.png") no-repeat center center;
+  background-size: cover;
+  z-index: -3;
 }
 
-/* =========================
-   FLOATING BLOBS
-========================= */
+/* ========================= LIGHT LAYER ========================= */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
 
+  /* jemné “světlo scény” */
+  background: radial-gradient(
+    circle at 30% 20%,
+    rgba(255,255,255,0.25),
+    transparent 60%
+  );
+}
+
+/* ========================= FLOATING BLOBS ========================= */
 .background {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    overflow: hidden;
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
 }
 
 .blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(40px);
-    opacity: 0.08;
-    background: white;
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.08;
+  background: white;
 }
 
 .blob1 { width: 320px; height: 320px; top: 10%; left: 10%; }
 .blob2 { width: 420px; height: 420px; top: 40%; left: 60%; }
 .blob3 { width: 280px; height: 280px; top: 70%; left: 20%; }
 
-/* =========================
-   HEADER (bez invertu)
-========================= */
-
+/* ========================= HEADER ========================= */
 .header-container {
-    margin: 25px 20px 0 20px;
-    padding: 25px;
-    text-align: center;
+  margin: 25px 20px 0 20px;
+  padding: 25px;
+  text-align: center;
 
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.6);
-
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.6);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
 .header h1 {
-    margin: 0 0 20px 0;
-    font-size: 28px;
-    color: #111827;
+  margin: 0 0 20px 0;
+  font-size: 28px;
+  color: #111827;
 }
 
-/* =========================
-   NAV
-========================= */
-
+/* ========================= NAV ========================= */
 .nav {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .nav button {
-    padding: 12px 24px;
-
-    background: rgba(255,255,255,0.9);
-    border: 1px solid rgba(0,0,0,0.08);
-
-    color: #111827;
-    font-weight: 600;
-
-    border-radius: 12px;
-    cursor: pointer;
-
-    transition: 0.2s ease;
+  padding: 12px 24px;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(0,0,0,0.08);
+  color: #111827;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
 }
 
 .nav button:hover {
-    transform: translateY(-1px);
-    background: rgba(255,255,255,1);
+  transform: translateY(-1px);
+  background: rgba(255,255,255,1);
 }
 
-/* =========================
-   LAYOUT
-========================= */
-
+/* ========================= LAYOUT ========================= */
 .container {
-    padding: 20px;
+  padding: 20px;
 }
 
 .grid {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 25px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 25px;
 }
 
 .stack {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
 .sub-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 25px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
 }
 
-/* =========================
-   KARTY (INVERT EFEKT)
-========================= */
-
-/* lehčí invert = jen “opačné barvy”, ne brutální efekt */
+/* ========================= CLEAN GLASS CARDS ========================= */
 .card {
-    background: rgba(0, 0, 0, 0.10);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
-    backdrop-filter: invert(0.9) hue-rotate(180deg) blur(8px);
-    -webkit-backdrop-filter: invert(0.9) hue-rotate(180deg) blur(8px);
+  border-radius: 20px;
+  padding: 30px;
 
-    border-radius: 20px;
-    padding: 30px;
-
-    border: 1px solid rgba(255,255,255,0.15);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.6);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
 .section-title {
-    font-weight: 700;
-    font-size: 19px;
-    margin-bottom: 18px;
-    border-bottom: 2px solid rgba(0,0,0,0.15);
-    padding-bottom: 8px;
+  font-weight: 700;
+  font-size: 19px;
+  margin-bottom: 18px;
+  border-bottom: 2px solid rgba(0,0,0,0.15);
+  padding-bottom: 8px;
 }
 
 .card p {
-    line-height: 1.6;
-    margin: 10px 0;
-    font-size: 15px;
+  line-height: 1.6;
+  margin: 10px 0;
+  font-size: 15px;
 }
 
 .card p strong {
-    font-weight: 700;
+  font-weight: 700;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-
+/* ========================= RESPONSIVE ========================= */
 @media(max-width: 900px){
-    .grid {
-        grid-template-columns: 1fr;
-    }
+  .grid {
+    grid-template-columns: 1fr;
+  }
 
-    .sub-grid {
-        grid-template-columns: 1fr;
-    }
+  .sub-grid {
+    grid-template-columns: 1fr;
+  }
 
-    .header-container {
-        margin: 15px 10px 0 10px;
-    }
+  .header-container {
+    margin: 15px 10px 0 10px;
+  }
 
-    .container {
-        padding: 10px;
-    }
+  .container {
+    padding: 10px;
+  }
 
-    /* 👇 tvoje požadované 25% místo top */
-    body::before {
-        background-position: center 25%;
-    }
+  body::before {
+    background-position: center 25%;
+  }
 }
-
 </style>
 </head>
 
 <body>
 
 <div class="background">
-    <div class="blob blob1"></div>
-    <div class="blob blob2"></div>
-    <div class="blob blob3"></div>
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
 </div>
 
 <div class="header-container">
-    <div class="header">
-        <h1>Topless Cabriolet Society</h1>
-    </div>
+  <div class="header">
+    <h1>Topless Cabriolet Society</h1>
+  </div>
 
-    <div class="nav">
-        <a href="stanovy.html"><button>Veřejné stanovy</button></a>
-        <a href="design.html"><button>Fotogalerie</button></a>
-    </div>
+  <div class="nav">
+    <a href="stanovy.html"><button>Veřejné stanovy</button></a>
+    <a href="design.html"><button>Fotogalerie</button></a>
+  </div>
 </div>
 
 <div class="container">
+  <div class="grid">
 
-    <div class="grid">
-
-        <div class="card">
-            <div class="section-title">Nadcházející akce</div>
-            <p>text</p>
-        </div>
-
-        <div class="stack">
-
-            <div class="sub-grid">
-
-                <div class="card">
-                    <div class="section-title">Kalendář</div>
-                    <p>Žádné nadcházející události.</p>
-                </div>
-
-                <div class="card">
-                    <div class="section-title">Základní informace</div>
-                    <p>Počet členů: <strong>5</strong></p>
-                    <p>Datum založení: <strong>14.06.2026</strong></p>
-                    <p>Nejstarší vůz:</p>
-                    <p>Největší objem:</p>
-                    <p>Nejvyšší počet válců:</p>
-                    <p>Nejvyšší nájezd:</p>
-                </div>
-
-            </div>
-
-            <div class="card">
-                <div class="section-title">Kontakt</div>
-                <p>Dotazy a přihlášky zasílejte na:</p>
-                <p><strong>topcab@seznam.cz</strong></p>
-                <p>Číslo účtu:</p>
-                <p><strong>XXXXXXXXX-XXXX</strong></p>
-            </div>
-
-        </div>
-
+    <div class="card">
+      <div class="section-title">Nadcházející akce</div>
+      <p>text</p>
     </div>
 
+    <div class="stack">
+
+      <div class="sub-grid">
+
+        <div class="card">
+          <div class="section-title">Kalendář</div>
+          <p>Žádné nadcházející události.</p>
+        </div>
+
+        <div class="card">
+          <div class="section-title">Základní informace</div>
+          <p>Počet členů: <strong>5</strong></p>
+          <p>Datum založení: <strong>14.06.2026</strong></p>
+          <p>Nejstarší vůz:</p>
+          <p>Největší objem:</p>
+          <p>Nejvyšší počet válců:</p>
+          <p>Nejvyšší nájezd:</p>
+        </div>
+
+      </div>
+
+      <div class="card">
+        <div class="section-title">Kontakt</div>
+        <p>Dotazy a přihlášky zasílejte na:</p>
+        <p><strong>topcab@seznam.cz</strong></p>
+        <p>Číslo účtu:</p>
+        <p><strong>XXXXXXXXX-XXXX</strong></p>
+      </div>
+
+    </div>
+  </div>
 </div>
 
 </body>
