@@ -15,7 +15,7 @@ body {
   position: relative;
 }
 
-/* ========================= BACKGROUND IMAGE ========================= */
+/* BACKGROUND */
 body::before {
   content: "";
   position: fixed;
@@ -25,90 +25,28 @@ body::before {
   z-index: -3;
 }
 
-/* ========================= LIGHT LAYER ========================= */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -2;
   pointer-events: none;
-
-  background: radial-gradient(
-    circle at 30% 20%,
-    rgba(255,255,255,0.25),
-    transparent 60%
-  );
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.25), transparent 60%);
 }
 
-/* ========================= FLOATING BLOBS ========================= */
-.background {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  overflow: hidden;
-}
-
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(40px);
-  opacity: 0.08;
-  background: white;
-}
-
-.blob1 { width: 320px; height: 320px; top: 10%; left: 10%; }
-.blob2 { width: 420px; height: 420px; top: 40%; left: 60%; }
-.blob3 { width: 280px; height: 280px; top: 70%; left: 20%; }
-
-/* ========================= HEADER (PŮVODNÍ) ========================= */
+/* ========================= HEADER ========================= */
 .header-container {
   margin: 25px 20px 0 20px;
   padding: 25px;
   text-align: center;
-
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-
   border-radius: 20px;
   border: 1px solid rgba(255,255,255,0.6);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
-.header h1 {
-  margin: 0 0 20px 0;
-  font-size: 28px;
-  color: #111827;
-}
-
-/* ========================= NAV (VRÁCENO) ========================= */
-.nav {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-.nav button {
-  padding: 12px 24px;
-  background: rgba(255,255,255,0.9);
-  border: 1px solid rgba(0,0,0,0.08);
-  color: #111827;
-  font-weight: 600;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-.nav button:hover {
-  transform: translateY(-1px);
-  background: rgba(255,255,255,1);
-}
-
-/* ========================= LAYOUT (PŮVODNÍ) ========================= */
-.container {
-  padding: 20px;
-}
+/* ========================= LAYOUT ========================= */
+.container { padding: 20px; }
 
 .grid {
   display: grid;
@@ -128,16 +66,13 @@ body::after {
   gap: 25px;
 }
 
-/* ========================= CARDS ========================= */
+/* ========================= CARD ========================= */
 .card {
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-
   border-radius: 20px;
   padding: 30px;
   border: 1px solid rgba(255,255,255,0.6);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
 .section-title {
@@ -148,7 +83,7 @@ body::after {
   padding-bottom: 8px;
 }
 
-/* ========================= CALENDAR (UVNITŘ KARTY) ========================= */
+/* ========================= CALENDAR ========================= */
 .calendar-header {
   display: flex;
   justify-content: space-between;
@@ -164,6 +99,16 @@ body::after {
   cursor: pointer;
 }
 
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  font-size: 11px;
+  font-weight: bold;
+  opacity: 0.6;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -171,71 +116,77 @@ body::after {
 }
 
 .day {
-  background: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.85);
   border: 1px solid rgba(0,0,0,0.08);
   border-radius: 10px;
-  min-height: 45px;
+  min-height: 50px;
   font-size: 12px;
-  padding: 4px;
+  padding: 6px;
   cursor: pointer;
   position: relative;
+  transition: 0.15s;
+}
+
+.day:hover {
+  transform: scale(1.02);
+}
+
+.day.event {
+  background: rgba(255, 120, 120, 0.35);
+  border: 1px solid rgba(255, 80, 80, 0.6);
 }
 
 .event-dot {
   width: 6px;
   height: 6px;
-  background: #111827;
+  background: #b00020;
   border-radius: 50%;
   position: absolute;
   bottom: 6px;
   right: 6px;
 }
 
+/* ========================= MODAL ========================= */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-box {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 280px;
+}
+
+.modal-box input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
 /* ========================= RESPONSIVE ========================= */
 @media(max-width: 900px){
   .grid { grid-template-columns: 1fr; }
   .sub-grid { grid-template-columns: 1fr; }
-
-  .header-container {
-    margin: 15px 10px 0 10px;
-  }
-
-  .container {
-    padding: 10px;
-  }
-
-  body::before {
-    background-position: center 25%;
-  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="background">
-  <div class="blob blob1"></div>
-  <div class="blob blob2"></div>
-  <div class="blob blob3"></div>
-</div>
-
-<!-- ========================= HEADER + NAV (VRÁCENO) ========================= -->
 <div class="header-container">
-  <div class="header">
-    <h1>Topless Cabriolet Society</h1>
-  </div>
-
-  <div class="nav">
-    <a href="stanovy.html"><button>Veřejné stanovy</button></a>
-    <a href="design.html"><button>Fotogalerie</button></a>
-  </div>
+  <h1>Topless Cabriolet Society</h1>
 </div>
 
-<!-- ========================= MAIN ========================= -->
 <div class="container">
   <div class="grid">
 
-    <!-- LEFT: CALENDAR CARD -->
+    <!-- CALENDAR -->
     <div class="card">
       <div class="section-title">Kalendář</div>
 
@@ -245,15 +196,19 @@ body::after {
         <button onclick="nextMonth()">▶</button>
       </div>
 
+      <div class="weekdays">
+        <div>Po</div><div>Út</div><div>St</div><div>Čt</div><div>Pá</div><div>So</div><div>Ne</div>
+      </div>
+
       <div class="calendar-grid" id="calendar"></div>
     </div>
 
-    <!-- RIGHT SIDE -->
+    <!-- RIGHT -->
     <div class="stack">
 
       <div class="card">
         <div class="section-title">Nadcházející akce</div>
-        <p>Žádné plánované akce momentálně nejsou.</p>
+        <p>Žádné akce</p>
       </div>
 
       <div class="sub-grid">
@@ -262,18 +217,11 @@ body::after {
           <div class="section-title">Základní informace</div>
           <p>Počet členů: <strong>5</strong></p>
           <p>Datum založení: <strong>14.06.2026</strong></p>
-          <p>Nejstarší vůz: <strong>—</strong></p>
-          <p>Největší objem: <strong>—</strong></p>
-          <p>Nejvyšší počet válců: <strong>—</strong></p>
-          <p>Nejvyšší nájezd: <strong>—</strong></p>
         </div>
 
         <div class="card">
           <div class="section-title">Kontakt</div>
-          <p>Dotazy a přihlášky:</p>
           <p><strong>topcab@seznam.cz</strong></p>
-          <p>Číslo účtu:</p>
-          <p><strong>XXXXXXXXX-XXXX</strong></p>
         </div>
 
       </div>
@@ -282,8 +230,27 @@ body::after {
   </div>
 </div>
 
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <input id="eventText" placeholder="Název události">
+    <button onclick="saveEvent()">Uložit</button>
+    <button onclick="deleteEvent()">Smazat</button>
+    <button onclick="closeModal()">Zavřít</button>
+  </div>
+</div>
+
 <script>
 let date = new Date();
+let selectedKey = null;
+
+function getEvents(){
+  return JSON.parse(localStorage.getItem("events") || "{}");
+}
+
+function saveEvents(data){
+  localStorage.setItem("events", JSON.stringify(data));
+}
 
 function renderCalendar(){
   const cal = document.getElementById("calendar");
@@ -294,40 +261,56 @@ function renderCalendar(){
   const year = date.getFullYear();
   const month = date.getMonth();
 
-  label.textContent = date.toLocaleString("cs-CZ", {
-    month: "long",
-    year: "numeric"
-  });
+  label.textContent = date.toLocaleString("cs-CZ",{month:"long",year:"numeric"});
 
   const firstDay = new Date(year, month, 1).getDay();
-  const daysInMonth = new Date(year, month+1, 0).getDate();
+  const offset = (firstDay === 0 ? 6 : firstDay - 1);
+  const days = new Date(year, month+1, 0).getDate();
 
-  for(let i=1;i<firstDay;i++){
+  const events = getEvents();
+
+  for(let i=0;i<offset;i++){
     cal.innerHTML += `<div></div>`;
   }
 
-  for(let d=1; d<=daysInMonth; d++){
+  for(let d=1; d<=days; d++){
     const key = `${year}-${month}-${d}`;
-    const hasEvent = localStorage.getItem(key);
+    const has = events[key];
 
     cal.innerHTML += `
-      <div class="day" onclick="toggleEvent('${key}')">
-        <strong>${d}</strong>
-        ${hasEvent ? '<div class="event-dot"></div>' : ""}
+      <div class="day ${has ? 'event' : ''}" onclick="openModal('${key}')">
+        ${d}
+        ${has ? '<div class="event-dot"></div>' : ''}
       </div>
     `;
   }
 }
 
-function toggleEvent(key){
-  const existing = localStorage.getItem(key);
+function openModal(key){
+  selectedKey = key;
+  const events = getEvents();
+  document.getElementById("eventText").value = events[key] || "";
+  document.getElementById("modal").style.display = "flex";
+}
 
-  if(existing){
-    localStorage.removeItem(key);
-  } else {
-    localStorage.setItem(key, "event");
-  }
+function closeModal(){
+  document.getElementById("modal").style.display = "none";
+}
 
+function saveEvent(){
+  const events = getEvents();
+  const val = document.getElementById("eventText").value;
+  events[selectedKey] = val;
+  saveEvents(events);
+  closeModal();
+  renderCalendar();
+}
+
+function deleteEvent(){
+  const events = getEvents();
+  delete events[selectedKey];
+  saveEvents(events);
+  closeModal();
   renderCalendar();
 }
 
