@@ -15,12 +15,12 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #36454F; /* Your exact charcoal shade */
+    background: #36454F;
     color: #e2e8f0;
     overflow-x: hidden;
 }
 
-/* floating blobs adjusted to subtly tint the charcoal background */
+/* floating blobs */
 .background {
     position: fixed;
     top: 0;
@@ -35,7 +35,7 @@ body {
     position: absolute;
     border-radius: 50%;
     filter: blur(80px);
-    opacity: 0.2; /* Kept low to remain elegant against #36454F */
+    opacity: 0.2;
     animation: float 12s infinite ease-in-out;
 }
 
@@ -77,13 +77,11 @@ body {
 
 .header-container {
     margin: 25px 20px 0 20px;
-    background: rgba(249, 246, 240, 0.95); /* Soft Bone White (#f9f6f0) - easy on the eyes */
+    background: rgba(249, 246, 240, 0.95);
     backdrop-filter: blur(10px);
     border-radius: 20px;
     padding: 25px;
     text-align: center;
-    
-    /* Smooth neumorphic shadows calculated for #36454F canvas */
     box-shadow: 
         12px 12px 24px rgba(27, 35, 40, 0.5), 
         -6px -6px 20px rgba(255, 255, 255, 0.05); 
@@ -93,7 +91,7 @@ body {
 .header h1 {
     margin: 0 0 20px 0;
     font-size: 28px;
-    color: #2c3539; /* Matte dark charcoal text to complement the bone white */
+    color: #2c3539;
     letter-spacing: -0.5px;
 }
 
@@ -115,7 +113,7 @@ body {
 .nav button {
     padding: 12px 24px;
     border: 1px solid #e2e4e0;
-    background: #f1eee7; /* Slightly darker bone tint for button depth */
+    background: #f1eee7;
     color: #4a5257;
     font-weight: 600;
     border-radius: 12px;
@@ -137,7 +135,7 @@ body {
 }
 
 /* =========================
-   LAYOUT (DASHBOARD GRID)
+   LAYOUT (MAIN DASHBOARD GRID)
 ========================= */
 
 .container {
@@ -152,12 +150,10 @@ body {
 
 /* Bone White Content Cards */
 .card {
-    background: rgba(249, 246, 240, 0.95); /* Soft Bone White (#f9f6f0) */
+    background: rgba(249, 246, 240, 0.95);
     backdrop-filter: blur(10px);
     border-radius: 20px;
     padding: 30px;
-    
-    /* Smooth neumorphic shadows calculated for #36454F canvas */
     box-shadow: 
         12px 12px 24px rgba(27, 35, 40, 0.5), 
         -6px -6px 20px rgba(255, 255, 255, 0.05);
@@ -173,7 +169,6 @@ body {
     padding-bottom: 8px;
 }
 
-/* Matte text styles inside the panels */
 .card p {
     color: #4a5560;
     line-height: 1.6;
@@ -185,17 +180,30 @@ body {
     color: #1a2226;
 }
 
-/* right column stacking */
+/* Right column layout stacking */
 .stack {
     display: flex;
     flex-direction: column;
     gap: 25px;
 }
 
-/* responsive */
+/* NEW: Inner sub-grid to put two specific cards next to each other */
+.sub-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+/* =========================
+   RESPONSIVE LAYOUT
+========================= */
+
 @media(max-width: 900px){
     .grid {
         grid-template-columns: 1fr;
+    }
+    .sub-grid {
+        grid-template-columns: 1fr; /* Stacks side-by-side containers on small screens */
     }
     .header-container {
         margin: 15px 10px 0 10px;
@@ -238,19 +246,24 @@ body {
         </div>
 
         <div class="stack">
-            <div class="card">
-                <div class="section-title">Základní informace</div>
-                <p>Počet členů: <strong>5</strong></p>
-                <p>Datum založení: <strong>14.06.2026</strong></p>
-                <p>Nejstarší vůz: </p>
-                <p>Největší objem: </p>
-                <p>Nejvyšší počet válců: </p>
-                <p>Nejvyšší nájezd: </p>
-            </div>
             
-            <div class="card">
-                <div class="section-title">Kalendář</div>
-                <p>Žádné nadcházející události.</p>
+            <div class="sub-grid">
+                
+                <div class="card">
+                    <div class="section-title">Kalendář</div>
+                    <p>Žádné nadcházející události.</p>
+                </div>
+
+                <div class="card">
+                    <div class="section-title">Základní informace</div>
+                    <p>Počet členů: <strong>5</strong></p>
+                    <p>Datum založení: <strong>14.06.2026</strong></p>
+                    <p>Nejstarší vůz: </p>
+                    <p>Největší objem: </p>
+                    <p>Nejvyšší počet válců: </p>
+                    <p>Nejvyšší nájezd: </p>
+                </div>
+
             </div>
             
             <div class="card">
@@ -260,6 +273,7 @@ body {
                 <p>Číslo účtu pro zasílání členských příspěvků:</p>
                 <p><strong>XXXXXXXXX-XXXX</strong></p>
             </div>
+
         </div>
 
     </div>
