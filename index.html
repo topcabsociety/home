@@ -40,28 +40,24 @@ body::after {
   );
 }
 
-/* ========================= SCROLL FADE (FIXED VERSION) ========================= */
+/* ========================= SCROLL WHITE GRADIENT (NOVÉ) ========================= */
 .scroll-fade {
   position: fixed;
   inset: 0;
-  z-index: 1;
+  z-index: 0;
   pointer-events: none;
 
+  /* default průhledné */
   opacity: 0;
 
-  /* IMPORTANT: ne přes celý viewport “natvrdo”, ale jemný overlay */
   background: linear-gradient(
     to bottom,
-    rgba(255,255,255,0.55) 0%,
-    rgba(255,255,255,0.20) 35%,
-    rgba(255,255,255,0.00) 70%
+    rgba(255,255,255,0.85),
+    rgba(255,255,255,0.25),
+    transparent
   );
 
-  /* 👇 důležité pro mobilní UI (eliminuje bílé hrany) */
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
-
-  transition: opacity 0.15s ease;
+  transition: opacity 0.2s ease;
 }
 
 /* ========================= FLOATING BLOBS ========================= */
@@ -210,6 +206,7 @@ body::after {
 
 <body>
 
+<!-- SCROLL GRADIENT OVERLAY -->
 <div class="scroll-fade" id="scrollFade"></div>
 
 <div class="background">
@@ -240,6 +237,7 @@ body::after {
     <div class="stack">
 
       <div class="sub-grid">
+
         <div class="card">
           <div class="section-title">Kalendář</div>
           <p>Žádné nadcházející události.</p>
@@ -249,12 +247,20 @@ body::after {
           <div class="section-title">Základní informace</div>
           <p>Počet členů: <strong>5</strong></p>
           <p>Datum založení: <strong>14.06.2026</strong></p>
+          <p>Nejstarší vůz:</p>
+          <p>Největší objem:</p>
+          <p>Nejvyšší počet válců:</p>
+          <p>Nejvyšší nájezd:</p>
         </div>
+
       </div>
 
       <div class="card">
         <div class="section-title">Kontakt</div>
+        <p>Dotazy a přihlášky zasílejte na:</p>
         <p><strong>topcab@seznam.cz</strong></p>
+        <p>Číslo účtu:</p>
+        <p><strong>XXXXXXXXX-XXXX</strong></p>
       </div>
 
     </div>
@@ -262,11 +268,12 @@ body::after {
 </div>
 
 <script>
+/* ========================= SCROLL EFFECT ========================= */
 const fade = document.getElementById("scrollFade");
 
 window.addEventListener("scroll", () => {
   const scrollY = window.scrollY;
-  const max = 350;
+  const max = 400; // jak rychle se efekt zesílí
 
   let opacity = scrollY / max;
   if (opacity > 1) opacity = 1;
