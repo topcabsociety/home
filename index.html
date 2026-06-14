@@ -9,16 +9,17 @@
 <style>
 
 /* =========================
-   BACKGROUND (CHARCOAL #36454F)
+   BACKGROUND (IMAGE + COVER)
 ========================= */
 
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    /*background: #36454F;*/
     color: #e2e8f0;
     overflow-x: hidden;
-   background: url("bck1.png") no-repeat center center fixed;
+    /* Ensuring the background image scales properly */
+    background: url("bck1.png") no-repeat center center fixed;
+    background-size: cover;
 }
 
 /* floating blobs */
@@ -73,26 +74,28 @@ body {
 }
 
 /* =========================
-   BONE WHITE PANELS & HEADER
+   INVERTED PANELS & HEADER
 ========================= */
 
 .header-container {
     margin: 25px 20px 0 20px;
-    background: rgba(249, 246, 240, 0.95);
-    backdrop-filter: blur(10px);
+    /* Transparent tint allowing the inverted image to show through */
+    background: rgba(0, 0, 0, 0.2);
+    /* Crucial part: inverts the image colors right beneath the panel */
+    backdrop-filter: invert(1) blur(10px);
+    -webkit-backdrop-filter: invert(1) blur(10px);
     border-radius: 20px;
     padding: 25px;
     text-align: center;
-    box-shadow: 
-        12px 12px 24px rgba(27, 35, 40, 0.5), 
-        -6px -6px 20px rgba(255, 255, 255, 0.05); 
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .header h1 {
     margin: 0 0 20px 0;
     font-size: 28px;
-    color: #2c3539;
+    /* Color adjusted to look sharp on the inverted background */
+    color: rgba(0, 0, 0, 0.85);
     letter-spacing: -0.5px;
 }
 
@@ -113,25 +116,23 @@ body {
 
 .nav button {
     padding: 12px 24px;
-    border: 1px solid #e2e4e0;
-    background: #f1eee7;
-    color: #4a5257;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background: rgba(0, 0, 0, 0.08);
+    color: rgba(0, 0, 0, 0.7);
     font-weight: 600;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
 }
 
 .nav button:hover {
-    background: #e6e3dc;
-    color: #1a202c;
-    border-color: #cbd2d6;
+    background: rgba(0, 0, 0, 0.15);
+    color: rgba(0, 0, 0, 0.9);
     transform: translateY(-1px);
 }
 
 .nav button:active {
-    background: #dad7d0;
+    background: rgba(0, 0, 0, 0.25);
     transform: translateY(0);
 }
 
@@ -149,36 +150,37 @@ body {
     gap: 25px;
 }
 
-/* Bone White Content Cards */
+/* Inverted Content Cards */
 .card {
-    background: rgba(249, 246, 240, 0.95);
-    backdrop-filter: blur(10px);
+    /* Transparent tint allowing the inverted image to show through */
+    background: rgba(0, 0, 0, 0.15);
+    /* Crucial part: inverts the image colors right beneath the panel */
+    backdrop-filter: invert(1) blur(10px);
+    -webkit-backdrop-filter: invert(1) blur(10px);
     border-radius: 20px;
     padding: 30px;
-    box-shadow: 
-        12px 12px 24px rgba(27, 35, 40, 0.5), 
-        -6px -6px 20px rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .section-title {
     font-weight: 700;
     font-size: 19px;
-    color: #2c3539;
+    color: rgba(0, 0, 0, 0.9);
     margin-bottom: 18px;
-    border-bottom: 2px solid #e9e6e0;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.15);
     padding-bottom: 8px;
 }
 
 .card p {
-    color: #4a5560;
+    color: rgba(0, 0, 0, 0.75);
     line-height: 1.6;
     margin: 10px 0;
     font-size: 15px;
 }
 
 .card p strong {
-    color: #1a2226;
+    color: rgba(0, 0, 0, 0.95);
 }
 
 /* Right column layout stacking */
@@ -204,7 +206,7 @@ body {
         grid-template-columns: 1fr;
     }
     .sub-grid {
-        grid-template-columns: 1fr; /* Stacks side-by-side containers on small screens */
+        grid-template-columns: 1fr;
     }
     .header-container {
         margin: 15px 10px 0 10px;
