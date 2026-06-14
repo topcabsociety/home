@@ -152,6 +152,187 @@ body {
     gap: 20px;
 }
 
+/* =========================
+   MOBILE CALENDAR STYLES
+========================= */
+
+.calendar-box {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.calendar-header month-year {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.cal-btn {
+    background: #e5e5e5;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.cal-btn:hover {
+    background: #d6d6d6;
+}
+
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.85em;
+    color: #666;
+}
+
+.days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.9em;
+    position: relative;
+    transition: background 0.2s;
+}
+
+.day:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.day.empty {
+    cursor: default;
+}
+
+.day.empty:hover {
+    background: none;
+}
+
+.day.selected {
+    background: #007aff !important;
+    color: white;
+    font-weight: bold;
+}
+
+.day.today {
+    border: 2px solid #007aff;
+}
+
+.day-dot {
+    position: absolute;
+    bottom: 3px;
+    width: 5px;
+    height: 5px;
+    background-color: #ff3b30;
+    border-radius: 50%;
+}
+
+.day.selected .day-dot {
+    background-color: white;
+}
+
+/* Agenda / Events Part */
+.events-section {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 15px;
+}
+
+.events-header {
+    font-size: 0.95em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.event-input-group {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.event-input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    outline: none;
+    font-size: 0.9em;
+    background: rgba(255,255,255,0.5);
+}
+
+.add-event-btn {
+    background: #34c759;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.add-event-btn:hover {
+    background: #28a745;
+}
+
+.events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 180px;
+    overflow-y: auto;
+}
+
+.event-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 8px 12px;
+    border-radius: 10px;
+    border-left: 4px solid #007aff;
+    font-size: 0.9em;
+}
+
+.event-text {
+    flex: 1;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.event-text:focus {
+    background: white;
+    padding: 2px 5px;
+    border-radius: 4px;
+    outline: 1px solid #007aff;
+}
+
+.delete-event-btn {
+    background: none;
+    border: none;
+    color: #ff3b30;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1em;
+    padding: 0 5px;
+}
+
 /* responsive */
 @media(max-width: 900px){
     .grid {
@@ -164,19 +345,16 @@ body {
 
 <body>
 
-<!-- FLOATING BACKGROUND -->
 <div class="background">
     <div class="blob blob1"></div>
     <div class="blob blob2"></div>
     <div class="blob blob3"></div>
 </div>
 
-<!-- HEADER -->
 <div class="header">
     <h1>Klub kabrioletů</h1>
 </div>
 
-<!-- MENU -->
 <div class="nav">
     <a href="stanovy.html"><button>Veřejné stanovy</button></a>
     <a href="kontakt.html"><button>Kontakt</button></a>
@@ -186,15 +364,12 @@ body {
     <a href="dashboard.html"><button>Dashboard</button></a>
 </div>
 
-<!-- GAP -->
 <div style="height: 20px;"></div>
 
-<!-- CONTENT -->
 <div class="container">
 
     <div class="grid">
 
-        <!-- LEFT COLUMN -->
         <div class="card">
             <div class="section-title">TO-DO list</div>
             <p>
@@ -203,30 +378,17 @@ body {
             </p>
         </div>
 
-        <!-- RIGHT COLUMN -->
         <div class="stack">
 
             <div class="card">
-                <div class="section-title">Application monitoring</div>
-                <p>Here could be application alerts...</p>
-                <p>DB checks, config validation, etc.</p>
-            </div>
+                <div class="section-title">this is container</div>
+                
+                <div class="calendar-box">
+                    <div class="calendar-header">
+                        <button class="cal-btn" id="prevMonth">&lt;</button>
+                        <div id="monthYearDisplay" class="month-year"></div>
+                        <button class="cal-btn" id="nextMonth">&gt;</button>
+                    </div>
 
-            <div class="card">
-                <div class="section-title">Some other stuff</div>
-                <p>Other content</p>
-            </div>
-
-            <div class="card">
-                <div class="section-title">Some other stuff</div>
-                <p>Empty block</p>
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-</body>
-</html>
+                    <div class="weekdays">
+                        <div>Po</div><div>
