@@ -9,40 +9,36 @@
 <style>
 
 /* =========================
-   BACKGROUND (MOBILE FIX)
+   BACKGROUND
 ========================= */
 
 body {
     margin: 0;
     font-family: Race Sport;
-    color: #1f2937;
+    color: #111827;
     overflow-x: hidden;
     position: relative;
 }
 
-/* background image layer */
+/* background image */
 body::before {
     content: "";
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url("bck1.png") no-repeat center top;
+    inset: 0;
+
+    background: url("bck1.png") no-repeat center center;
     background-size: cover;
+
     z-index: -2;
 }
 
 /* =========================
-   FLOATING BLOBS (optional)
+   FLOATING BLOBS
 ========================= */
 
 .background {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     z-index: -1;
     overflow: hidden;
 }
@@ -52,32 +48,15 @@ body::before {
     border-radius: 50%;
     filter: blur(40px);
     opacity: 0.08;
-    background: #ffffff;
+    background: white;
 }
 
-.blob1 {
-    width: 320px;
-    height: 320px;
-    top: 10%;
-    left: 10%;
-}
-
-.blob2 {
-    width: 420px;
-    height: 420px;
-    top: 40%;
-    left: 60%;
-}
-
-.blob3 {
-    width: 280px;
-    height: 280px;
-    top: 70%;
-    left: 20%;
-}
+.blob1 { width: 320px; height: 320px; top: 10%; left: 10%; }
+.blob2 { width: 420px; height: 420px; top: 40%; left: 60%; }
+.blob3 { width: 280px; height: 280px; top: 70%; left: 20%; }
 
 /* =========================
-   HEADER + PANELS (SNOW STYLE)
+   HEADER (bez invertu)
 ========================= */
 
 .header-container {
@@ -85,14 +64,14 @@ body::before {
     padding: 25px;
     text-align: center;
 
-    background: rgba(255, 255, 255, 0.85); /* SNÍH */
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 
     border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255,255,255,0.6);
 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
 .header h1 {
@@ -102,7 +81,7 @@ body::before {
 }
 
 /* =========================
-   NAV BUTTONS (clean white panels)
+   NAV
 ========================= */
 
 .nav {
@@ -112,15 +91,11 @@ body::before {
     gap: 15px;
 }
 
-.nav a {
-    text-decoration: none;
-}
-
 .nav button {
     padding: 12px 24px;
 
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: rgba(255,255,255,0.9);
+    border: 1px solid rgba(0,0,0,0.08);
 
     color: #111827;
     font-weight: 600;
@@ -128,12 +103,12 @@ body::before {
     border-radius: 12px;
     cursor: pointer;
 
-    transition: all 0.2s ease;
+    transition: 0.2s ease;
 }
 
 .nav button:hover {
-    background: rgba(255, 255, 255, 1);
     transform: translateY(-1px);
+    background: rgba(255,255,255,1);
 }
 
 /* =========================
@@ -150,40 +125,6 @@ body::before {
     gap: 25px;
 }
 
-/* SNOW CARDS */
-.card {
-    background: rgba(255, 255, 255, 0.85); /* SNÍH */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-
-    border-radius: 20px;
-    padding: 30px;
-
-    border: 1px solid rgba(255, 255, 255, 0.7);
-
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-}
-
-.section-title {
-    font-weight: 700;
-    font-size: 19px;
-    color: #111827;
-    margin-bottom: 18px;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.08);
-    padding-bottom: 8px;
-}
-
-.card p {
-    color: #374151;
-    line-height: 1.6;
-    margin: 10px 0;
-    font-size: 15px;
-}
-
-.card p strong {
-    color: #111827;
-}
-
 .stack {
     display: flex;
     flex-direction: column;
@@ -194,6 +135,42 @@ body::before {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 25px;
+}
+
+/* =========================
+   KARTY (INVERT EFEKT)
+========================= */
+
+/* lehčí invert = jen “opačné barvy”, ne brutální efekt */
+.card {
+    background: rgba(0, 0, 0, 0.10);
+
+    backdrop-filter: invert(0.9) hue-rotate(180deg) blur(8px);
+    -webkit-backdrop-filter: invert(0.9) hue-rotate(180deg) blur(8px);
+
+    border-radius: 20px;
+    padding: 30px;
+
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.section-title {
+    font-weight: 700;
+    font-size: 19px;
+    margin-bottom: 18px;
+    border-bottom: 2px solid rgba(0,0,0,0.15);
+    padding-bottom: 8px;
+}
+
+.card p {
+    line-height: 1.6;
+    margin: 10px 0;
+    font-size: 15px;
+}
+
+.card p strong {
+    font-weight: 700;
 }
 
 /* =========================
@@ -217,8 +194,9 @@ body::before {
         padding: 10px;
     }
 
+    /* 👇 tvoje požadované 25% místo top */
     body::before {
-        background-position: center top;
+        background-position: center 25%;
     }
 }
 
