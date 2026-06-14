@@ -33,12 +33,31 @@ body::after {
   z-index: -2;
   pointer-events: none;
 
-  /* jemné “světlo scény” */
   background: radial-gradient(
     circle at 30% 20%,
     rgba(255,255,255,0.25),
     transparent 60%
   );
+}
+
+/* ========================= SCROLL WHITE GRADIENT (NOVÉ) ========================= */
+.scroll-fade {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  /* default průhledné */
+  opacity: 0;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.85),
+    rgba(255,255,255,0.25),
+    transparent
+  );
+
+  transition: opacity 0.2s ease;
 }
 
 /* ========================= FLOATING BLOBS ========================= */
@@ -187,6 +206,9 @@ body::after {
 
 <body>
 
+<!-- SCROLL GRADIENT OVERLAY -->
+<div class="scroll-fade" id="scrollFade"></div>
+
 <div class="background">
   <div class="blob blob1"></div>
   <div class="blob blob2"></div>
@@ -244,6 +266,21 @@ body::after {
     </div>
   </div>
 </div>
+
+<script>
+/* ========================= SCROLL EFFECT ========================= */
+const fade = document.getElementById("scrollFade");
+
+window.addEventListener("scroll", () => {
+  const scrollY = window.scrollY;
+  const max = 400; // jak rychle se efekt zesílí
+
+  let opacity = scrollY / max;
+  if (opacity > 1) opacity = 1;
+
+  fade.style.opacity = opacity;
+});
+</script>
 
 </body>
 </html>
