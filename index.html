@@ -9,7 +9,7 @@
 <style>
 
 /* =========================
-   BACKGROUND (IMAGE + COVER)
+   BACKGROUND (FIX FOR MOBILE)
 ========================= */
 
 body {
@@ -17,9 +17,20 @@ body {
     font-family: Race Sport;
     color: #e2e8f0;
     overflow-x: hidden;
-    /* Ensuring the background image scales properly */
-    background: url("bck1.png") no-repeat center center fixed;
+    position: relative;
+}
+
+/* background image layer */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("bck1.png") no-repeat center center;
     background-size: cover;
+    z-index: -2;
 }
 
 /* floating blobs */
@@ -38,13 +49,11 @@ body {
     border-radius: 50%;
     filter: blur(40px);
     opacity: 0.1;
-    /*animation: float 12s infinite ease-in-out;*/
 }
 
 .blob1 {
     width: 320px;
     height: 320px;
-    /*background: #6366f1;*/
     top: 10%;
     left: 10%;
 }
@@ -52,38 +61,23 @@ body {
 .blob2 {
     width: 420px;
     height: 420px;
-    /*background: #ec4899;*/
     top: 40%;
     left: 60%;
-    /*animation-duration: 18s;*/
 }
 
 .blob3 {
     width: 280px;
     height: 280px;
-    /*background: #10b981;*/
     top: 70%;
     left: 20%;
-    /*animation-duration: 22s;*/
-}
-
-@keyframes float {
-    0%   { transform: translate(0,0) scale(1); }
-    50%  { transform: translate(30px,-30px) scale(1.05); }
-    100% { transform: translate(0,0) scale(1); }
 }
 
 /* =========================
-   INVERTED PANELS & HEADER
+   HEADER
 ========================= */
 
 .header-container {
     margin: 25px 20px 0 20px;
-    /* Transparent tint allowing the inverted image to show through 
-    background: rgba(0, 0, 0, 0.02);
-     Crucial part: inverts the image colors right beneath the panel
-    backdrop-filter: invert(1) blur(10px); 
-    -webkit-backdrop-filter: invert(1) blur(10px);*/
     border-radius: 20px;
     padding: 25px;
     text-align: center;
@@ -94,13 +88,12 @@ body {
 .header h1 {
     margin: 0 0 20px 0;
     font-size: 28px;
-    /* Color adjusted to look sharp on the inverted background */
     color: rgba(0, 0, 0, 0.85);
     letter-spacing: -0.5px;
 }
 
 /* =========================
-   NAV & BUTTONS
+   NAV
 ========================= */
 
 .nav {
@@ -127,17 +120,11 @@ body {
 
 .nav button:hover {
     background: rgba(0, 0, 0, 0.15);
-    color: rgba(0, 0, 0, 0.9);
     transform: translateY(-1px);
 }
 
-.nav button:active {
-    background: rgba(0, 0, 0, 0.25);
-    transform: translateY(0);
-}
-
 /* =========================
-   LAYOUT (MAIN DASHBOARD GRID)
+   LAYOUT
 ========================= */
 
 .container {
@@ -150,11 +137,8 @@ body {
     gap: 25px;
 }
 
-/* Inverted Content Cards */
 .card {
-    /* Transparent tint allowing the inverted image to show through */
     background: rgba(0, 0, 0, 0.10);
-    /* Crucial part: inverts the image colors right beneath the panel */
     backdrop-filter: invert(1) blur(8px);
     -webkit-backdrop-filter: invert(1) blur(8px);
     border-radius: 20px;
@@ -183,14 +167,12 @@ body {
     color: rgba(0, 0, 0, 0.95);
 }
 
-/* Right column layout stacking */
 .stack {
     display: flex;
     flex-direction: column;
     gap: 25px;
 }
 
-/* NEW: Inner sub-grid to put two specific cards next to each other */
 .sub-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -198,21 +180,29 @@ body {
 }
 
 /* =========================
-   RESPONSIVE LAYOUT
+   RESPONSIVE
 ========================= */
 
 @media(max-width: 900px){
     .grid {
         grid-template-columns: 1fr;
     }
+
     .sub-grid {
         grid-template-columns: 1fr;
     }
+
     .header-container {
         margin: 15px 10px 0 10px;
     }
+
     .container {
         padding: 10px;
+    }
+
+    /* jemné doladění backgroundu na mobilech */
+    body::before {
+        background-position: center 30%;
     }
 }
 
@@ -243,15 +233,13 @@ body {
 
         <div class="card">
             <div class="section-title">Nadcházející akce</div>
-            <p>
-                text
-            </p>
+            <p>text</p>
         </div>
 
         <div class="stack">
-            
+
             <div class="sub-grid">
-                
+
                 <div class="card">
                     <div class="section-title">Kalendář</div>
                     <p>Žádné nadcházející události.</p>
@@ -261,14 +249,14 @@ body {
                     <div class="section-title">Základní informace</div>
                     <p>Počet členů: <strong>5</strong></p>
                     <p>Datum založení: <strong>14.06.2026</strong></p>
-                    <p>Nejstarší vůz: </p>
-                    <p>Největší objem: </p>
-                    <p>Nejvyšší počet válců: </p>
-                    <p>Nejvyšší nájezd: </p>
+                    <p>Nejstarší vůz:</p>
+                    <p>Největší objem:</p>
+                    <p>Nejvyšší počet válců:</p>
+                    <p>Nejvyšší nájezd:</p>
                 </div>
 
             </div>
-            
+
             <div class="card">
                 <div class="section-title">Kontakt</div>
                 <p>Dotazy a přihlášky zasílejte na:</p>
