@@ -15,7 +15,7 @@ body {
   position: relative;
 }
 
-/* ========================= BACKGROUND IMAGE ========================= */
+/* ========================= BACKGROUND ========================= */
 body::before {
   content: "";
   position: fixed;
@@ -25,7 +25,6 @@ body::before {
   z-index: -3;
 }
 
-/* ========================= LIGHT LAYER ========================= */
 body::after {
   content: "";
   position: fixed;
@@ -40,7 +39,7 @@ body::after {
   );
 }
 
-/* ========================= FLOATING BLOBS ========================= */
+/* ========================= BLOBS ========================= */
 .background {
   position: fixed;
   inset: 0;
@@ -147,10 +146,6 @@ body::after {
   position: relative;
 }
 
-.day strong {
-  font-size: 11px;
-}
-
 .event-dot {
   width: 6px;
   height: 6px;
@@ -161,32 +156,12 @@ body::after {
   right: 6px;
 }
 
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.4);
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  width: 280px;
-}
-
-.modal-content input {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-}
-
 /* ========================= RESPONSIVE ========================= */
 @media(max-width: 900px){
   .grid { grid-template-columns: 1fr; }
   .sub-grid { grid-template-columns: 1fr; }
+  .header-container { margin: 15px 10px 0 10px; }
+  .container { padding: 10px; }
 }
 </style>
 </head>
@@ -206,6 +181,7 @@ body::after {
 <div class="container">
   <div class="grid">
 
+    <!-- ========================= LEFT COLUMN ========================= -->
     <div class="card">
       <div class="section-title">Kalendář</div>
 
@@ -218,29 +194,41 @@ body::after {
       <div class="calendar-grid" id="calendar"></div>
     </div>
 
+    <!-- ========================= RIGHT COLUMN ========================= -->
     <div class="stack">
+
       <div class="card">
-        <div class="section-title">Info</div>
-        <p>Klikni na den pro přidání události.</p>
+        <div class="section-title">Nadcházející akce</div>
+        <p>Žádné plánované akce momentálně nejsou.</p>
+      </div>
+
+      <div class="sub-grid">
+
+        <div class="card">
+          <div class="section-title">Základní informace</div>
+          <p>Počet členů: <strong>5</strong></p>
+          <p>Datum založení: <strong>14.06.2026</strong></p>
+          <p>Nejstarší vůz: <strong>—</strong></p>
+          <p>Největší objem: <strong>—</strong></p>
+          <p>Nejvyšší počet válců: <strong>—</strong></p>
+          <p>Nejvyšší nájezd: <strong>—</strong></p>
+        </div>
+
+        <div class="card">
+          <div class="section-title">Kontakt</div>
+          <p>Dotazy a přihlášky:</p>
+          <p><strong>topcab@seznam.cz</strong></p>
+          <p>Číslo účtu:</p>
+          <p><strong>XXXXXXXXX-XXXX</strong></p>
+        </div>
+
       </div>
     </div>
-
-  </div>
-</div>
-
-<!-- MODAL -->
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <input id="eventText" placeholder="Událost...">
-    <button onclick="saveEvent()">Uložit</button>
-    <button onclick="deleteEvent()">Smazat</button>
-    <button onclick="closeModal()">Zavřít</button>
   </div>
 </div>
 
 <script>
 let date = new Date();
-let selectedDay = null;
 
 function renderCalendar(){
   const cal = document.getElementById("calendar");
@@ -274,29 +262,6 @@ function renderCalendar(){
       </div>
     `;
   }
-}
-
-function openModal(key){
-  selectedDay = key;
-  document.getElementById("modal").style.display = "flex";
-  document.getElementById("eventText").value = localStorage.getItem(key) || "";
-}
-
-function closeModal(){
-  document.getElementById("modal").style.display = "none";
-}
-
-function saveEvent(){
-  const val = document.getElementById("eventText").value;
-  localStorage.setItem(selectedDay, val);
-  closeModal();
-  renderCalendar();
-}
-
-function deleteEvent(){
-  localStorage.removeItem(selectedDay);
-  closeModal();
-  renderCalendar();
 }
 
 function nextMonth(){
