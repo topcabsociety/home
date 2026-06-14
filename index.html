@@ -9,13 +9,16 @@
 <style>
 
 /* =========================
-   BACKGROUND (CHARCOAL #36454F)
+   BACKGROUND (CHARCOAL #36454F + OBRÁZEK)
 ========================= */
 
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #36454F;
+    /* Pojistná barva + cesta k obrázku na GitHubu */
+    background: #36454F url("pozadi.jpg") no-repeat center center fixed;
+    /* Nastavení, aby obrázek pokryl celou plochu a nedeformoval se */
+    background-size: cover;
     color: #e2e8f0;
     overflow-x: hidden;
 }
@@ -172,113 +175,4 @@ body {
 .card p {
     color: #4a5560;
     line-height: 1.6;
-    margin: 10px 0;
-    font-size: 15px;
-}
-
-.card p strong {
-    color: #1a2226;
-}
-
-/* Right column layout stacking */
-.stack {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-}
-
-/* NEW: Inner sub-grid to put two specific cards next to each other */
-.sub-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 25px;
-}
-
-/* =========================
-   RESPONSIVE LAYOUT
-========================= */
-
-@media(max-width: 900px){
-    .grid {
-        grid-template-columns: 1fr;
-    }
-    .sub-grid {
-        grid-template-columns: 1fr; /* Stacks side-by-side containers on small screens */
-    }
-    .header-container {
-        margin: 15px 10px 0 10px;
-    }
-    .container {
-        padding: 10px;
-    }
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="background">
-    <div class="blob blob1"></div>
-    <div class="blob blob2"></div>
-    <div class="blob blob3"></div>
-</div>
-
-<div class="header-container">
-    <div class="header">
-        <h1>Topless Cabriolet Society</h1>
-    </div>
-    <div class="nav">
-        <a href="stanovy.html"><button>Veřejné stanovy</button></a>
-        <a href="design.html"><button>Fotogalerie</button></a>
-    </div>
-</div>
-
-<div class="container">
-
-    <div class="grid">
-
-        <div class="card">
-            <div class="section-title">Nadcházející akce</div>
-            <p>
-                text
-            </p>
-        </div>
-
-        <div class="stack">
-            
-            <div class="sub-grid">
-                
-                <div class="card">
-                    <div class="section-title">Kalendář</div>
-                    <p>Žádné nadcházející události.</p>
-                </div>
-
-                <div class="card">
-                    <div class="section-title">Základní informace</div>
-                    <p>Počet členů: <strong>5</strong></p>
-                    <p>Datum založení: <strong>14.06.2026</strong></p>
-                    <p>Nejstarší vůz: </p>
-                    <p>Největší objem: </p>
-                    <p>Nejvyšší počet válců: </p>
-                    <p>Nejvyšší nájezd: </p>
-                </div>
-
-            </div>
-            
-            <div class="card">
-                <div class="section-title">Kontakt</div>
-                <p>Dotazy a přihlášky zasílejte na:</p>
-                <p><strong>topcab@seznam.cz</strong></p>
-                <p>Číslo účtu pro zasílání členských příspěvků:</p>
-                <p><strong>XXXXXXXXX-XXXX</strong></p>
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-</body>
-</html>
+    margin: 1
