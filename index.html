@@ -15,7 +15,7 @@ body {
   position: relative;
 }
 
-/* ========================= BACKGROUND ========================= */
+/* ========================= BACKGROUND IMAGE ========================= */
 body::before {
   content: "";
   position: fixed;
@@ -25,6 +25,7 @@ body::before {
   z-index: -3;
 }
 
+/* ========================= LIGHT LAYER ========================= */
 body::after {
   content: "";
   position: fixed;
@@ -39,7 +40,7 @@ body::after {
   );
 }
 
-/* ========================= BLOBS ========================= */
+/* ========================= FLOATING BLOBS ========================= */
 .background {
   position: fixed;
   inset: 0;
@@ -59,7 +60,7 @@ body::after {
 .blob2 { width: 420px; height: 420px; top: 40%; left: 60%; }
 .blob3 { width: 280px; height: 280px; top: 70%; left: 20%; }
 
-/* ========================= HEADER ========================= */
+/* ========================= HEADER (PŮVODNÍ) ========================= */
 .header-container {
   margin: 25px 20px 0 20px;
   padding: 25px;
@@ -74,8 +75,40 @@ body::after {
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
-/* ========================= LAYOUT ========================= */
-.container { padding: 20px; }
+.header h1 {
+  margin: 0 0 20px 0;
+  font-size: 28px;
+  color: #111827;
+}
+
+/* ========================= NAV (VRÁCENO) ========================= */
+.nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.nav button {
+  padding: 12px 24px;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(0,0,0,0.08);
+  color: #111827;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.nav button:hover {
+  transform: translateY(-1px);
+  background: rgba(255,255,255,1);
+}
+
+/* ========================= LAYOUT (PŮVODNÍ) ========================= */
+.container {
+  padding: 20px;
+}
 
 .grid {
   display: grid;
@@ -99,6 +132,8 @@ body::after {
 .card {
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
   border-radius: 20px;
   padding: 30px;
   border: 1px solid rgba(255,255,255,0.6);
@@ -113,7 +148,7 @@ body::after {
   padding-bottom: 8px;
 }
 
-/* ========================= CALENDAR ========================= */
+/* ========================= CALENDAR (UVNITŘ KARTY) ========================= */
 .calendar-header {
   display: flex;
   justify-content: space-between;
@@ -160,8 +195,18 @@ body::after {
 @media(max-width: 900px){
   .grid { grid-template-columns: 1fr; }
   .sub-grid { grid-template-columns: 1fr; }
-  .header-container { margin: 15px 10px 0 10px; }
-  .container { padding: 10px; }
+
+  .header-container {
+    margin: 15px 10px 0 10px;
+  }
+
+  .container {
+    padding: 10px;
+  }
+
+  body::before {
+    background-position: center 25%;
+  }
 }
 </style>
 </head>
@@ -174,14 +219,23 @@ body::after {
   <div class="blob blob3"></div>
 </div>
 
+<!-- ========================= HEADER + NAV (VRÁCENO) ========================= -->
 <div class="header-container">
-  <h1>Topless Cabriolet Society</h1>
+  <div class="header">
+    <h1>Topless Cabriolet Society</h1>
+  </div>
+
+  <div class="nav">
+    <a href="stanovy.html"><button>Veřejné stanovy</button></a>
+    <a href="design.html"><button>Fotogalerie</button></a>
+  </div>
 </div>
 
+<!-- ========================= MAIN ========================= -->
 <div class="container">
   <div class="grid">
 
-    <!-- ========================= LEFT COLUMN ========================= -->
+    <!-- LEFT: CALENDAR CARD -->
     <div class="card">
       <div class="section-title">Kalendář</div>
 
@@ -194,7 +248,7 @@ body::after {
       <div class="calendar-grid" id="calendar"></div>
     </div>
 
-    <!-- ========================= RIGHT COLUMN ========================= -->
+    <!-- RIGHT SIDE -->
     <div class="stack">
 
       <div class="card">
@@ -223,6 +277,7 @@ body::after {
         </div>
 
       </div>
+
     </div>
   </div>
 </div>
@@ -256,12 +311,24 @@ function renderCalendar(){
     const hasEvent = localStorage.getItem(key);
 
     cal.innerHTML += `
-      <div class="day" onclick="openModal('${key}')">
+      <div class="day" onclick="toggleEvent('${key}')">
         <strong>${d}</strong>
         ${hasEvent ? '<div class="event-dot"></div>' : ""}
       </div>
     `;
   }
+}
+
+function toggleEvent(key){
+  const existing = localStorage.getItem(key);
+
+  if(existing){
+    localStorage.removeItem(key);
+  } else {
+    localStorage.setItem(key, "event");
+  }
+
+  renderCalendar();
 }
 
 function nextMonth(){
