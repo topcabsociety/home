@@ -1,21 +1,105 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8">
-    <title>Topless Cabriolet Society</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Klub kabrioletů</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+}
+
+/* HLAVIČKA */
+.header {
+    text-align: center;
+    padding: 30px;
+    background: white;
+    border-bottom: 1px solid #ddd;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.header a {
+    text-decoration: none;
+    color: black;
+}
+
+/* MENU */
+.nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 15px;
+    background: #ffffff;
+    border-bottom: 1px solid #ddd;
+}
+
+.nav a {
+    text-decoration: none;
+}
+
+.nav button {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    background: #eee;
+    cursor: pointer;
+}
+
+.nav button:hover {
+    background: #ddd;
+}
+
+/* OBSAH */
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* FOOTER / DIVIDER */
+.divider {
+    height: 20px;
+}
+</style>
+
 </head>
+
 <body>
-    <h1>Topless Cabriolet Society</h1>
-    <p>Vítejte na stránkách klubu.</p>
-    <br>
-    <ul>
-    <li>Veřejné stanovy</li>
-    <li>Kontakt</li>
-    <li>Nadcházející akce</li>
-    <li>Kalendář iOS mini přehled vpravo</li>
-    <li>Neumorphic design</li>
-    <li>Pohyb statika jako v Django projektu – míhání dashboardu</li>
-    <li>Vytvořit neumorfickou mřížku</li>
-</ul>
+
+<!-- HLAVIČKA -->
+<div class="header">
+    <h1><a href="index.html">Klub kabrioletů</a></h1>
+</div>
+
+<!-- MENU -->
+<div class="nav">
+    <a href="stanovy.html"><button>Veřejné stanovy</button></a>
+    <a href="kontakt.html"><button>Kontakt</button></a>
+    <a href="akce.html"><button>Nadcházející akce</button></a>
+    <a href="kalendar.html"><button>Kalendář</button></a>
+    <a href="design.html"><button>Neumorphic design</button></a>
+    <a href="dashboard.html"><button>Dashboard pohyb</button></a>
+</div>
+
+<div class="divider"></div>
+
+<!-- OBSAH STRÁNKY -->
+<div class="container">
+
+    <h2>Vítejte</h2>
+    <p>
+        Toto je jednoduchý statický web klubu kabrioletů.
+    </p>
+
+</div>
+
 </body>
 </html>
