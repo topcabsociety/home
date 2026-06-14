@@ -14,7 +14,7 @@
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
     background: #e9eaee;
     overflow-x: hidden;
 }
@@ -138,11 +138,14 @@ body {
     padding: 15px;
     backdrop-filter: blur(10px);
     box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    position: relative;
 }
 
 .section-title {
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    color: #1c1c1e;
 }
 
 /* right column stacking */
@@ -153,242 +156,159 @@ body {
 }
 
 /* =========================
-   MOBILE CALENDAR STYLES
+   NATÍVNÍ MOBILNÍ KALENDÁŘ
 ========================= */
 
-.calendar-box {
+.mobile-calendar {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.calendar-header {
+/* Horní lišta - Měsíc a ovládání */
+.cal-top-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.calendar-header month-year {
-    font-weight: bold;
-    font-size: 1.1em;
+.cal-month-title {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #000;
 }
 
-.cal-btn {
-    background: #e5e5e5;
-    border: none;
-    padding: 5px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.cal-btn:hover {
-    background: #d6d6d6;
-}
-
-.weekdays {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    text-align: center;
-    font-weight: bold;
-    font-size: 0.85em;
-    color: #666;
-}
-
-.days-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
+.cal-nav-arrows {
+    display: flex;
     gap: 5px;
 }
 
-.day {
-    aspect-ratio: 1;
+.cal-arrow-btn {
+    background: rgba(0,0,0,0.05);
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Horizontální týdenní pás (iOS style) */
+.cal-week-strip {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    background: rgba(255,255,255,0.4);
+    padding: 10px;
+    border-radius: 14px;
+}
+
+.cal-strip-day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cal-strip-day .day-name {
+    font-size: 0.75em;
+    color: #8e8e93;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.cal-strip-day .day-number {
+    font-size: 1.05em;
+    font-weight: 600;
+    color: #1c1c1e;
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    cursor: pointer;
-    font-size: 0.9em;
-    position: relative;
-    transition: background 0.2s;
 }
 
-.day:hover {
-    background: rgba(0, 0, 0, 0.05);
-}
-
-.day.empty {
-    cursor: default;
-}
-
-.day.empty:hover {
-    background: none;
-}
-
-.day.selected {
-    background: #007aff !important;
-    color: white;
-    font-weight: bold;
-}
-
-.day.today {
+/* Aktivní / Dnešní stavy */
+.cal-strip-day.today .day-number {
     border: 2px solid #007aff;
 }
 
-.day-dot {
+.cal-strip-day.selected {
+    background: #007aff;
+}
+.cal-strip-day.selected .day-name,
+.cal-strip-day.selected .day-number {
+    color: #fff !important;
+}
+
+/* Indikátor události (tečka) */
+.cal-has-event {
+    position: relative;
+}
+.cal-has-event::after {
+    content: '';
     position: absolute;
-    bottom: 3px;
-    width: 5px;
-    height: 5px;
-    background-color: #ff3b30;
+    bottom: 4px;
+    width: 4px;
+    height: 4px;
+    background: #ff3b30;
     border-radius: 50%;
 }
-
-.day.selected .day-dot {
-    background-color: white;
+.cal-strip-day.selected.cal-has-event::after {
+    background: #fff;
 }
 
-/* Agenda / Events Part */
-.events-section {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    padding-top: 15px;
+/* Výpis agendy pod kalendářem */
+.agenda-section {
+    margin-top: 5px;
 }
 
-.events-header {
-    font-size: 0.95em;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.event-input-group {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 12px;
-}
-
-.event-input {
-    flex: 1;
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    outline: none;
+.agenda-title {
     font-size: 0.9em;
-    background: rgba(255,255,255,0.5);
+    font-weight: 600;
+    color: #8e8e93;
+    margin-bottom: 10px;
 }
 
-.add-event-btn {
-    background: #34c759;
-    color: white;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.add-event-btn:hover {
-    background: #28a745;
-}
-
-.events-list {
+.agenda-list {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    max-height: 180px;
-    overflow-y: auto;
+    gap: 10px;
 }
 
-.event-item {
+.agenda-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(255, 255, 255, 0.6);
-    padding: 8px 12px;
-    border-radius: 10px;
+    background: #fff;
+    padding: 12px 15px;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
     border-left: 4px solid #007aff;
-    font-size: 0.9em;
 }
 
-.event-text {
+.agenda-text {
+    font-size: 0.95em;
+    color: #1c1c1e;
     flex: 1;
-    cursor: pointer;
-    margin-right: 10px;
 }
 
-.event-text:focus {
-    background: white;
-    padding: 2px 5px;
-    border-radius: 4px;
-    outline: 1px solid #007aff;
+.agenda-actions {
+    display: flex;
+    gap: 10px;
 }
 
-.delete-event-btn {
+.agenda-btn {
     background: none;
     border: none;
-    color: #ff3b30;
     cursor: pointer;
-    font-weight: bold;
-    font-size: 1.1em;
-    padding: 0 5px;
+    font-size: 0.9em;
 }
-
-/* responsive */
-@media(max-width: 900px){
-    .grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="background">
-    <div class="blob blob1"></div>
-    <div class="blob blob2"></div>
-    <div class="blob blob3"></div>
-</div>
-
-<div class="header">
-    <h1>Klub kabrioletů</h1>
-</div>
-
-<div class="nav">
-    <a href="stanovy.html"><button>Veřejné stanovy</button></a>
-    <a href="kontakt.html"><button>Kontakt</button></a>
-    <a href="akce.html"><button>Nadcházející akce</button></a>
-    <a href="kalendar.html"><button>Kalendář iOS</button></a>
-    <a href="design.html"><button>Neumorphic design</button></a>
-    <a href="dashboard.html"><button>Dashboard</button></a>
-</div>
-
-<div style="height: 20px;"></div>
-
-<div class="container">
-
-    <div class="grid">
-
-        <div class="card">
-            <div class="section-title">TO-DO list</div>
-            <p>
-                text<br>
-                test
-            </p>
-        </div>
-
-        <div class="stack">
-
-            <div class="card">
-                <div class="section-title">this is container</div>
-                
-                <div class="calendar-box">
-                    <div class="calendar-header">
-                        <button class="cal-btn" id="prevMonth">&lt;</button>
-                        <div id="monthYearDisplay" class="month-year"></div>
-                        <button class="cal-btn" id="nextMonth">&gt;</button>
-                    </div>
-
-                    <div class="weekdays">
-                        <div>Po</div><div>
