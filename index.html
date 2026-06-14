@@ -9,7 +9,7 @@
 <style>
 
 /* =========================
-   BACKGROUND
+   BACKGROUND (ASYMMETRIE FIX)
 ========================= */
 
 body {
@@ -20,14 +20,31 @@ body {
     position: relative;
 }
 
-/* background image */
+/* IMAGE LAYER */
 body::before {
     content: "";
     position: fixed;
     inset: 0;
 
-    background: url("bck1.png") no-repeat center center;
+    background: url("bck1.png") no-repeat;
     background-size: cover;
+    background-position: left center;
+
+    z-index: -3;
+}
+
+/* OVERLAY (zlepší čitelnost + schová ořez) */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background: linear-gradient(
+        to right,
+        rgba(0,0,0,0.25),
+        rgba(0,0,0,0.05),
+        rgba(0,0,0,0)
+    );
 
     z-index: -2;
 }
@@ -56,7 +73,7 @@ body::before {
 .blob3 { width: 280px; height: 280px; top: 70%; left: 20%; }
 
 /* =========================
-   HEADER (bez invertu)
+   HEADER
 ========================= */
 
 .header-container {
@@ -64,7 +81,7 @@ body::before {
     padding: 25px;
     text-align: center;
 
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255,255,255,0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 
@@ -138,12 +155,11 @@ body::before {
 }
 
 /* =========================
-   KARTY (INVERT EFEKT)
+   CARDS (INVERT EFFECT)
 ========================= */
 
-/* lehčí invert = jen “opačné barvy”, ne brutální efekt */
 .card {
-    background: rgba(0, 0, 0, 0.10);
+    background: rgba(0,0,0,0.08);
 
     backdrop-filter: invert(0.9) hue-rotate(180deg) blur(8px);
     -webkit-backdrop-filter: invert(0.9) hue-rotate(180deg) blur(8px);
@@ -164,20 +180,17 @@ body::before {
 }
 
 .card p {
-    line-height: 1.6;
     margin: 10px 0;
+    line-height: 1.6;
     font-size: 15px;
 }
 
-.card p strong {
-    font-weight: 700;
-}
-
 /* =========================
-   RESPONSIVE
+   RESPONSIVE (ASYMMETRIE FIX MOBILE)
 ========================= */
 
 @media(max-width: 900px){
+
     .grid {
         grid-template-columns: 1fr;
     }
@@ -194,9 +207,9 @@ body::before {
         padding: 10px;
     }
 
-    /* 👇 tvoje požadované 25% místo top */
+    /* 👉 důležitý fix pro mobile */
     body::before {
-        background-position: center 25%;
+        background-position: 20% 25%;
     }
 }
 
