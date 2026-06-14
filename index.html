@@ -16,6 +16,7 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: #e9eaee;
+    color: #333;
     overflow-x: hidden;
 }
 
@@ -34,7 +35,7 @@ body {
     position: absolute;
     border-radius: 50%;
     filter: blur(60px);
-    opacity: 0.4;
+    opacity: 0.35;
     animation: float 12s infinite ease-in-out;
 }
 
@@ -71,33 +72,40 @@ body {
 }
 
 /* =========================
-   HEADER
+   NEUMORPHIC HEADER CARD
 ========================= */
 
-.header {
+.header-container {
+    margin: 20px 20px 0 20px; /* Aligns left/right exactly with the content container */
+    background: rgba(233, 234, 238, 0.75); /* Neumorphic base with slight transparency */
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 20px;
+    
+    /* Neumorphic soft shadows */
+    box-shadow: 
+        8px 8px 16px rgba(163, 177, 198, 0.6), 
+        -8px -8px 16px rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.5);
     text-align: center;
-    padding: 25px;
-    background: rgba(255,255,255,0.7);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid #ddd;
 }
+
 .header h1 {
-    margin: 0;
+    margin: 0 0 15px 0;
     font-size: 26px;
+    color: #4a5568;
+    text-shadow: 1px 1px 0px rgba(255,255,255,0.8);
 }
 
 /* =========================
-   MENU
+   MENU BUTTONS
 ========================= */
 
 .nav {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 10px;
-    padding: 15px;
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(10px);
+    gap: 15px;
 }
 
 .nav a {
@@ -105,15 +113,33 @@ body {
 }
 
 .nav button {
-    padding: 10px 14px;
-    border: none;
-    background: #e5e5e5;
-    border-radius: 10px;
+    padding: 12px 20px;
+    border: 1px solid rgba(255,255,255,0.4);
+    background: #e9eaee;
+    color: #555;
+    font-weight: bold;
+    border-radius: 12px;
     cursor: pointer;
+    transition: all 0.2s ease;
+    
+    /* Subtle neumorphic pop for buttons */
+    box-shadow: 
+        4px 4px 8px rgba(163, 177, 198, 0.5), 
+        -4px -4px 8px rgba(255, 255, 255, 0.8);
 }
 
 .nav button:hover {
-    background: #d6d6d6;
+    color: #222;
+    box-shadow: 
+        2px 2px 4px rgba(163, 177, 198, 0.5), 
+        -2px -2px 4px rgba(255, 255, 255, 0.8);
+}
+
+/* Inset look when clicked */
+.nav button:active {
+    box-shadow: 
+        inset 3px 3px 6px rgba(163, 177, 198, 0.6), 
+        inset -3px -3px 6px rgba(255, 255, 255, 0.8);
 }
 
 /* =========================
@@ -130,18 +156,30 @@ body {
     gap: 20px;
 }
 
-/* cards */
+/* Neumorphic Cards */
 .card {
-    background: rgba(255,255,255,0.7);
+    background: rgba(233, 234, 238, 0.75);
+    backdrop-filter: blur(15px);
     border-radius: 20px;
-    padding: 15px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    padding: 25px;
+    
+    box-shadow: 
+        8px 8px 16px rgba(163, 177, 198, 0.6), 
+        -8px -8px 16px rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .section-title {
     font-weight: bold;
-    margin-bottom: 10px;
+    font-size: 18px;
+    color: #4a5568;
+    margin-bottom: 15px;
+}
+
+p {
+    color: #616e7f;
+    line-height: 1.5;
+    margin: 8px 0;
 }
 
 /* right column stacking */
@@ -156,6 +194,12 @@ body {
     .grid {
         grid-template-columns: 1fr;
     }
+    .header-container {
+        margin: 10px 10px 0 10px;
+    }
+    .container {
+        padding: 10px;
+    }
 }
 
 </style>
@@ -163,32 +207,26 @@ body {
 
 <body>
 
-<!-- FLOATING BACKGROUND -->
 <div class="background">
     <div class="blob blob1"></div>
     <div class="blob blob2"></div>
     <div class="blob blob3"></div>
 </div>
 
-<!-- HEADER -->
-<div class="header">
-    <h1>Topless Cabriolet Society</h1>
+<div class="header-container">
+    <div class="header">
+        <h1>Topless Cabriolet Society</h1>
+    </div>
+    <div class="nav">
+        <a href="stanovy.html"><button>Veřejné stanovy</button></a>
+        <a href="design.html"><button>Fotogalerie</button></a>
+    </div>
 </div>
 
-<!-- MENU -->
-<div class="nav">
-    <a href="stanovy.html"><button>Veřejné stanovy</button></a>
-    <a href="design.html"><button>Fotogalerie</button></a>
-</div>
-<!-- GAP -->
-<div style="height: 20px;"></div>
-
-<!-- CONTENT -->
 <div class="container">
 
     <div class="grid">
 
-        <!-- LEFT COLUMN -->
         <div class="card">
             <div class="section-title">Nadcházející akce</div>
             <p>
@@ -196,9 +234,8 @@ body {
             </p>
         </div>
 
-        <!-- RIGHT COLUMN -->
         <div class="stack">
-<div class="card">
+            <div class="card">
                 <div class="section-title">Základní informace</div>
                 <p>Počet členů: 5</p>
                 <p>Datum založení: 14.06.2026</p>
@@ -206,18 +243,20 @@ body {
                 <p>Největší objem: </p>
                 <p>Nejvyšší počet válců: </p>
                 <p>Nejvyšší nájezd: </p>
-</div>
+            </div>
+            
             <div class="card">
                 <div class="section-title">Kalendář</div>
+                <p>Žádné nadcházející události.</p>
             </div>
+            
             <div class="card">
                 <div class="section-title">Kontakt</div>
                 <p>Dotazy a přihlášky zasílejte na:</p>
-                <p>topcab@seznam.cz</p>
-                <p>Číslo účtu pro zasílání členských příspěvků</p>
-                <p>XXXXXXXXX-XXXX</p>
+                <p><strong>topcab@seznam.cz</strong></p>
+                <p>Číslo účtu pro zasílání členských příspěvků:</p>
+                <p><strong>XXXXXXXXX-XXXX</strong></p>
             </div>
-
         </div>
 
     </div>
