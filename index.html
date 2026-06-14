@@ -9,7 +9,7 @@
 <style>
 
 /* =========================
-   BACKGROUND (ASYMMETRIE FIX)
+   BACKGROUND
 ========================= */
 
 body {
@@ -20,31 +20,14 @@ body {
     position: relative;
 }
 
-/* IMAGE LAYER */
+/* background image */
 body::before {
     content: "";
     position: fixed;
     inset: 0;
 
-    background: url("bck1.png") no-repeat;
+    background: url("bck1.png") no-repeat center center;
     background-size: cover;
-    background-position: left center;
-
-    z-index: -3;
-}
-
-/* OVERLAY (zlepší čitelnost + schová ořez) */
-body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-
-    background: linear-gradient(
-        to right,
-        rgba(0,0,0,0.25),
-        rgba(0,0,0,0.05),
-        rgba(0,0,0,0)
-    );
 
     z-index: -2;
 }
@@ -73,7 +56,7 @@ body::after {
 .blob3 { width: 280px; height: 280px; top: 70%; left: 20%; }
 
 /* =========================
-   HEADER
+   HEADER (bez invertu)
 ========================= */
 
 .header-container {
@@ -81,7 +64,7 @@ body::after {
     padding: 25px;
     text-align: center;
 
-    background: rgba(255,255,255,0.85);
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 
@@ -155,11 +138,12 @@ body::after {
 }
 
 /* =========================
-   CARDS (INVERT EFFECT)
+   KARTY (INVERT EFEKT)
 ========================= */
 
+/* lehčí invert = jen “opačné barvy”, ne brutální efekt */
 .card {
-    background: rgba(0,0,0,0.08);
+    background: rgba(0, 0, 0, 0.10);
 
     backdrop-filter: invert(0.9) hue-rotate(180deg) blur(8px);
     -webkit-backdrop-filter: invert(0.9) hue-rotate(180deg) blur(8px);
@@ -180,17 +164,20 @@ body::after {
 }
 
 .card p {
-    margin: 10px 0;
     line-height: 1.6;
+    margin: 10px 0;
     font-size: 15px;
 }
 
+.card p strong {
+    font-weight: 700;
+}
+
 /* =========================
-   RESPONSIVE (ASYMMETRIE FIX MOBILE)
+   RESPONSIVE
 ========================= */
 
 @media(max-width: 900px){
-
     .grid {
         grid-template-columns: 1fr;
     }
@@ -207,9 +194,9 @@ body::after {
         padding: 10px;
     }
 
-    /* 👉 důležitý fix pro mobile */
+    /* 👇 tvoje požadované 25% místo top */
     body::before {
-        background-position: 20% 25%;
+        background-position: center 25%;
     }
 }
 
